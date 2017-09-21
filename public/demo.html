@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <main>
+    </main>
+
+    <footer>
+        <input type="text">
+        <button>发送</button>
+    </footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var ipt = document.querySelector('footer input')
+        socket.on('chat', function(msg){
+            var node = document.createElement('p')
+            node.innerText = msg;
+            document.querySelector('main').appendChild(node)
+            console.log(msg)
+        });
+        document.querySelector('footer button').onclick = function(){
+            socket.emit('chat', 'rick', ipt.value)
+        }
+    </script>
+</body>
+</html>
